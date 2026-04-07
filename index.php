@@ -6,8 +6,8 @@ error_reporting(E_ALL);
  * PHP Version 7.2
  *
  * @category Router
- * @package  Grupo e shipping
- * @author   grupo e>
+ * @package  SimplePHPOOPMvc
+ * @author   Orlando J Betancourth <orlando.betancourth@gmail.com>
  * @license  MIT http://
  * @version  CVS:1.0.0
  * @link     http://
@@ -44,3 +44,4 @@ try {
     $instance->run();
     die();
 }
+
