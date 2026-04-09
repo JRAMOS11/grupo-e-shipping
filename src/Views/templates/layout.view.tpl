@@ -14,6 +14,32 @@
   {{foreach BeginScripts}}
     <script src="{{~BASE_DIR}}/{{this}}"></script>
   {{endfor BeginScripts}}
+  <style>
+    .floating-cart {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        background: #28a745;
+        color: white;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        z-index: 1000;
+        transition: transform 0.3s;
+    }
+    .floating-cart:hover {
+        transform: scale(1.1);
+    }
+    .floating-cart img {
+        width: 28px !important;
+        height: 28px !important;
+        filter: invert(1);
+    }
+  </style>
 </head>
 <body>
   <header>
@@ -27,6 +53,7 @@
     <nav id="menu">
       <ul>
         <li><a href="index.php?page={{PUBLIC_DEFAULT_CONTROLLER}}"><i class="fas fa-home"></i>&nbsp;Inicio</a></li>
+        <li><a href="index.php?page=Checkout_Checkout"><img src="{{~BASE_DIR}}/public/imgs/products/carrito.png" alt="Cart" style="height: 18px; vertical-align: text-bottom; margin-right: 4px; filter: invert(1);"> Carrito</a></li>
         {{foreach PUBLIC_NAVIGATION}}
             <li><a href="{{nav_url}}">{{nav_label}}</a></li>
         {{endfor PUBLIC_NAVIGATION}}
@@ -42,5 +69,9 @@
   {{foreach EndScripts}}
     <script src="{{~BASE_DIR}}/{{this}}"></script>
   {{endfor EndScripts}}
+  
+  <a href="index.php?page=Checkout_Checkout" class="floating-cart">
+      <img src="{{~BASE_DIR}}/public/imgs/products/carrito.png" alt="Ver Carrito">
+  </a>
 </body>
 </html>
