@@ -55,7 +55,7 @@ class Products extends Table
             productStatus
         FROM products
         WHERE productStatus = 'ACT'
-        LIMIT 4;";
+        LIMIT 7 OFFSET 0;";
 
         return self::obtenerRegistros($sqlstr, []);
     }
@@ -73,7 +73,7 @@ class Products extends Table
             productStatus
         FROM products
         WHERE productStatus = 'ACT'
-        LIMIT 4;";
+        LIMIT 6 OFFSET 7;";
 
         return self::obtenerRegistros($sqlstr, []);
     }
@@ -92,7 +92,7 @@ class Products extends Table
         FROM products
         WHERE productStatus = 'ACT'
         ORDER BY productId DESC
-        LIMIT 4;";
+        LIMIT 6 OFFSET 13;";
 
         return self::obtenerRegistros($sqlstr, []);
     }

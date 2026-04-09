@@ -36,7 +36,7 @@
     </div>
     
     <div style="text-align: center; margin-top: 3rem;">
-        <a href="index.php?page=HomeController" class="btn-continue" style="display: inline-block; padding: 1.5rem 3rem;">
+        <a href="index.php?page=HomeController" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'" style="background: #17a2b8; color: white; padding: 1rem 3rem; border-radius: 8px; text-decoration: none; font-size: 1.2rem; font-weight: bold; box-shadow: 0 4px 10px rgba(23, 162, 184, 0.3); display: inline-flex; align-items: center; gap: 10px; transition: all 0.3s ease;">
             <i class="fas fa-arrow-left"></i> Volver a los Productos para Seguir Comprando
         </a>
     </div>
