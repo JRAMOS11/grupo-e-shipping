@@ -6,8 +6,8 @@ error_reporting(E_ALL);
  * PHP Version 7.2
  *
  * @category Router
- * @package  SimplePHPOOPMvc
- * @author   Orlando J Betancourth <orlando.betancourth@gmail.com>
+ * @package  GRUPO-E_SHIPPING
+ * @author   
  * @license  MIT http://
  * @version  CVS:1.0.0
  * @link     http://

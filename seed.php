@@ -4,16 +4,15 @@ session_start();
 $servername = "127.0.0.1";
 $username = "root";
 $password = "";
-$dbname = "honduras_ecommerce"; // Asumiendo el nombre de BD de clase, intentaremos varios si cae.
+$dbname = "sunzena_shipping"; 
 
 try {
-    $conn = new PDO("mysql:host=$servername;dbname=e_commerce_mvc", $username, $password);
+    $conn = new PDO("mysql:host=$servername;dbname=sunzena_shipping", $username, $password);
 } catch (PDOException $e) {
     try {
-        $conn = new PDO("mysql:host=$servername;dbname=ecommerce", $username, $password);
+        $conn = new PDO("mysql:host=$servername;dbname=sunzena_shipping", $username, $password);
     } catch(PDOException $e2) {
-        // En tu entorno el DSN estandar suele ser "ecommerce" o el definido en parameters.env
-        // Usaremos PDO puro y parameters.env manual.
+        
     }
 }
 

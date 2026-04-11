@@ -3,8 +3,18 @@
    
     {
       "id": "Menu_Products",
-      "nav_url": "index.php?page=Products_Products",
+      "nav_url": "index.php?page=Products_ProductoController&action=listarProductos",
       "nav_label": "Productos"
+    },
+    {
+      "id": "Menu_FuncionesRol",
+      "nav_url": "index.php?page=Roles_FuncionesRol",
+      "nav_label": "Funciones por Rol"
+    },
+    {
+      "id": "Menu_UserRoles",
+      "nav_url": "index.php?page=Usuarios_UsuarioRol",
+      "nav_label": "Usuarios Roles"
     },
     {
       "id": "Menu_SignIn",
@@ -20,7 +30,7 @@
   "private": [
     {
       "id": "Menu_Home",
-      "nav_url": "index.php?page=HomeController",
+      "nav_url": "index.php?page=Products_ProductoController&action=listarProductos",
       "nav_label": "Inicio"
     },
     {
