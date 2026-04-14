@@ -42,6 +42,11 @@
       "id": "Menu_PaymentCheckout",
       "nav_url": "index.php?page=Checkout_Checkout",
       "nav_label": "Carretilla de Compra"
+    },
+    {
+      "id": "Ctr_RutasEntrega",
+      "nav_url": "index.php?page=RutasEntrega_RutasEntrega",
+      "nav_label": "Rutas de Entrega"
     }
   ]
 }

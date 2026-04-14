@@ -6,19 +6,20 @@ use Dao\Table;
 
 class Orders extends Table
 {
-    public static function createOrder(int $usercod, string $anoncod, float $total)
+    public static function createOrder(int $usercod, string $anoncod, float $total, int $ruta)
     {
-        $sqlstr = "INSERT INTO ordenes (usercod, anoncod, ordenfching, ordensubtotal, ordenimpuesto, ordentotal, ordenest) 
-                   VALUES (:usercod, :anoncod, NOW(), :subtotal, :impuesto, :total, 'COM');";
-        
+        $sqlstr = "INSERT INTO ordenes (usercod, anoncod, ordenfching, ordensubtotal, ordenimpuesto, ordentotal, ordenest, id_ruta) 
+                   VALUES (:usercod, :anoncod, NOW(), :subtotal, :impuesto, :total, 'COM', :ruta);";
+
         $params = [
             "usercod" => $usercod > 0 ? $usercod : null,
             "anoncod" => $anoncod !== "" ? $anoncod : null,
             "subtotal" => $total,
             "impuesto" => 0,
-            "total" => $total
+            "total" => $total,
+            "ruta" => $ruta
         ];
-        
+
         self::executeNonQuery($sqlstr, $params);
         return self::getConn()->lastInsertId();
     }
@@ -27,7 +28,7 @@ class Orders extends Table
     {
         $sqlstr = "INSERT INTO orden_detalle (ordencod, productId, ordetcantidad, ordetprecio, ordettotal)
                    VALUES (:ordencod, :productId, :cantidad, :precio, :total);";
-        
+
         return self::executeNonQuery($sqlstr, [
             "ordencod" => $ordencod,
             "productId" => $productId,
@@ -37,4 +38,3 @@ class Orders extends Table
         ]);
     }
 }
-?>

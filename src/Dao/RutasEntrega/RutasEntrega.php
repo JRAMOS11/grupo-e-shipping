@@ -19,7 +19,8 @@ class RutasEntrega extends Table
             r.origen,
             r.destino,
             r.distancia_km,
-            r.duracion_min
+            r.duracion_min,
+            r.rutaest
         FROM rutasentrega r";
 
         $sqlstrCount = "SELECT COUNT(*) as count FROM rutasentrega r";
@@ -83,7 +84,8 @@ class RutasEntrega extends Table
             r.origen,
             r.destino,
             r.distancia_km,
-            r.duracion_min
+            r.duracion_min,
+            r.rutaest
         FROM rutasentrega r
         WHERE r.id_ruta = :id_ruta";
 
@@ -112,18 +114,45 @@ class RutasEntrega extends Table
         return self::executeNonQuery($sqlstr, $params);
     }
 
+    public static function insertDestinoEntrega(
+        string $destino
+    ): int {
+        $sqlstr = "INSERT INTO rutasentrega
+            (origen, destino, distancia_km, duracion_min, rutaest)
+            VALUES
+            (:origen, :destino, :distancia_km, :duracion_min, :rutaest)";
+
+        $params = [
+            "origen" => "Por definir",
+            "destino" => $destino,
+            "distancia_km" => 0,
+            "duracion_min" => 0,
+            "rutaest" => "PEN"
+        ];
+
+        self::executeNonQuery($sqlstr, $params);
+        $row = self::obtenerUnRegistro(
+            "SELECT LAST_INSERT_ID() AS id_ruta;",
+            []
+        );
+        return intval($row["id_ruta"] ?? 0);
+    }
+
+
     public static function updateRutaEntrega(
         int $id_ruta,
         string $origen,
         string $destino,
         float $distancia_km,
-        int $duracion_min
+        int $duracion_min,
+        string $rutaest
     ) {
         $sqlstr = "UPDATE rutasentrega SET
             origen = :origen,
             destino = :destino,
             distancia_km = :distancia_km,
-            duracion_min = :duracion_min
+            duracion_min = :duracion_min,
+            rutaest = :rutaest
         WHERE id_ruta = :id_ruta";
 
         $params = [
@@ -131,7 +160,8 @@ class RutasEntrega extends Table
             "origen" => $origen,
             "destino" => $destino,
             "distancia_km" => $distancia_km,
-            "duracion_min" => $duracion_min
+            "duracion_min" => $duracion_min,
+            "rutaest" => $rutaest
         ];
 
         return self::executeNonQuery($sqlstr, $params);
@@ -144,4 +174,3 @@ class RutasEntrega extends Table
         return self::executeNonQuery($sqlstr, $params);
     }
 }
-?>

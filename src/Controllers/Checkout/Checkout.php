@@ -7,6 +7,7 @@ use Views\Renderer;
 use Dao\Cart\Cart as CartDAO;
 use Dao\Products\Products as ProductsDAO;
 use Dao\Checkout\Orders as OrdersDAO;
+use Dao\RutasEntrega\RutasEntrega as RutasEntregaDAO;
 use Utilities\Site as Site;
 
 class Checkout extends PublicController
@@ -76,33 +77,33 @@ class Checkout extends PublicController
     }
 
     private function addProduct(int $productId): void
-{
-    if ($productId <= 0) {
-        header("Location: index.php?page=Products_Products");
+    {
+        if ($productId <= 0) {
+            header("Location: index.php?page=Products_Products");
+            exit();
+        }
+
+        $product = ProductsDAO::getProductById($productId);
+
+        if (!$product) {
+            header("Location: index.php?page=Products_Products");
+            exit();
+        }
+
+        $price = floatval($product["productPrice"]);
+        $usercod = $this->getUserCod();
+
+        if ($usercod > 0) {
+            // usuario logeado
+            CartDAO::addToCartUser($usercod, $productId, 1, $price);
+        } else {
+            // usuario anónimo
+            CartDAO::addToCartAnon($this->getAnonCod(), $productId, 1, $price);
+        }
+
+        header("Location: index.php?page=Checkout_Checkout");
         exit();
     }
-
-    $product = ProductsDAO::getProductById($productId);
-
-    if (!$product) {
-        header("Location: index.php?page=Products_Products");
-        exit();
-    }
-
-    $price = floatval($product["productPrice"]);
-    $usercod = $this->getUserCod();
-
-    if ($usercod > 0) {
-        // usuario logeado
-        CartDAO::addToCartUser($usercod, $productId, 1, $price);
-    } else {
-        // usuario anónimo
-        CartDAO::addToCartAnon($this->getAnonCod(), $productId, 1, $price);
-    }
-
-    header("Location: index.php?page=Checkout_Checkout");
-    exit();
-}
 
     private function removeProduct(int $productId): void
     {
@@ -142,6 +143,18 @@ class Checkout extends PublicController
     {
         $usercod = $this->getUserCod();
         $anoncod = $this->getAnonCod();
+        //Crear Ruta de entrega segun la dirección ingresada 
+        $direccion = "";
+        $rutacod = 0;
+        $metodoPago = $_POST["metodoPago"] ?? "";
+        if ($metodoPago === "tarjeta") {
+            $direccion = $_POST["cc_direccion"] ?? "";
+        } else {
+            $direccion = $_POST["ef_direccion"] ?? "";
+        }
+        if ($direccion !== "") {
+            $rutacod = RutasEntregaDAO::insertDestinoEntrega($direccion);
+        }
 
         if ($usercod > 0) {
             $totalData = CartDAO::getCartTotalByUser($usercod);
@@ -150,8 +163,8 @@ class Checkout extends PublicController
             if ($total > 0) {
                 // Registrar orden
                 $cartItems = CartDAO::getCartByUser($usercod);
-                $ordencod = OrdersDAO::createOrder($usercod, "", $total);
-                
+                $ordencod = OrdersDAO::createOrder($usercod, "", $total, $rutacod);
+
                 foreach ($cartItems as $item) {
                     OrdersDAO::createOrderDetail($ordencod, $item["productId"], $item["crrctd"], $item["crrprc"], floatval($item["lineTotal"]));
                 }
@@ -169,8 +182,8 @@ class Checkout extends PublicController
             if ($total > 0) {
                 // Registrar orden para anónimo
                 $cartItems = CartDAO::getCartByAnon($anoncod);
-                $ordencod = OrdersDAO::createOrder(0, $anoncod, $total);
-                
+                $ordencod = OrdersDAO::createOrder(0, $anoncod, $total, $rutacod);
+
                 foreach ($cartItems as $item) {
                     OrdersDAO::createOrderDetail($ordencod, $item["productId"], $item["crrctd"], $item["crrprc"], floatval($item["lineTotal"]));
                 }

@@ -2,11 +2,11 @@
 
 namespace Controllers\RutasEntrega;
 
-use Controllers\PublicController;
+use Controllers\PrivateController;
 use Views\Renderer;
 use Dao\RutasEntrega\RutasEntrega as RutasEntregaDAO;
 
-class RutasEntrega extends PublicController
+class RutasEntrega extends PrivateController
 {
     public function run(): void
     {
@@ -16,4 +16,3 @@ class RutasEntrega extends PublicController
         Renderer::render("rutasentrega/rutasentrega", $viewData);
     }
 }
-?>

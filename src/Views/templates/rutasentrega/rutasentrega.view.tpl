@@ -11,6 +11,7 @@
                 <th>Destino</th>
                 <th>Distancia KM</th>
                 <th>Duración Min</th>
+                <th>Estado</th>
                 <th>
                     <a href="index.php?page=RutasEntrega-RutaEntrega&mode=INS&id_ruta=0">Nuevo</a>
                 </th>
@@ -24,6 +25,7 @@
                 <td>{{destino}}</td>
                 <td>{{distancia_km}}</td>
                 <td>{{duracion_min}}</td>
+                <td>{{rutaest}} </td>
                 <td>
                     <a href="index.php?page=RutasEntrega-RutaEntrega&mode=DSP&id_ruta={{id_ruta}}">Mostrar</a>
                     &nbsp;
