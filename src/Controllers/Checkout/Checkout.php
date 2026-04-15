@@ -8,6 +8,7 @@ use Dao\Cart\Cart as CartDAO;
 use Dao\Products\Products as ProductsDAO;
 use Dao\Checkout\Orders as OrdersDAO;
 use Dao\RutasEntrega\RutasEntrega as RutasEntregaDAO;
+use Dao\Transacciones\Transacciones as TransaccionesDAO;
 use Utilities\Site as Site;
 
 class Checkout extends PublicController
@@ -16,8 +17,8 @@ class Checkout extends PublicController
 
     private function getUserCod(): int
     {
-        if (isset($_SESSION["login"]["usercod"])) {
-            return intval($_SESSION["login"]["usercod"]);
+        if (isset($_SESSION["login"]["userId"])) {
+            return intval($_SESSION["login"]["userId"]);
         }
         return 0;
     }
@@ -168,6 +169,15 @@ class Checkout extends PublicController
                 foreach ($cartItems as $item) {
                     OrdersDAO::createOrderDetail($ordencod, $item["productId"], $item["crrctd"], $item["crrprc"], floatval($item["lineTotal"]));
                 }
+                $metodoTrans = ($metodoPago === "tarjeta") ? "PIXELPAY" : "LOCAL";
+                TransaccionesDAO::createTransaccion(
+                    $ordencod,
+                    $usercod,
+                    $total,
+                    $metodoTrans,
+                    "",
+                    "COM"
+                );
 
                 $_SESSION["receipt_items"] = $cartItems;
                 $_SESSION["receipt_total"] = $total;
@@ -187,7 +197,16 @@ class Checkout extends PublicController
                 foreach ($cartItems as $item) {
                     OrdersDAO::createOrderDetail($ordencod, $item["productId"], $item["crrctd"], $item["crrprc"], floatval($item["lineTotal"]));
                 }
+                $metodoTrans = ($metodoPago === "tarjeta") ? "PIXELPAY" : "LOCAL";
 
+                TransaccionesDAO::createTransaccion(
+                    $ordencod,
+                    0,
+                    $total,
+                    $metodoTrans,
+                    "",
+                    "COM"
+                );
                 $_SESSION["receipt_items"] = $cartItems;
                 $_SESSION["receipt_total"] = $total;
                 $_SESSION["receipt_order"] = $ordencod;
