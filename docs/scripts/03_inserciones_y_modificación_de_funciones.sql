@@ -15,31 +15,46 @@ INSERT INTO `funciones` (`fncod`, `fndsc`, `fnest`, `fntyp`) VALUES
 ('Controllers\\RutasEntrega\\RutaEntrega', 'Controllers\\RutasEntrega\\RutaEntrega', 'ACT', 'CTR'),
 ('Controllers\\RutasEntrega\\RutasEntrega', 'Controllers\\RutasEntrega\\RutasEntrega', 'ACT', 'CTR'),
 ('Controllers\\Sec\\Logo', 'Controllers\\Sec\\Logout', 'ACT', 'CTR'),
+('Controllers\\Transacciones\\Historial', 'Controllers\\Transacciones\\Historial', 'ACT', 'CTR'),
 ('Ctr_Checkout', 'Controlador de checkout', 'ACT', 'CTR'),
 ('Ctr_Products', 'Controlador de productos', 'ACT', 'CTR'),
 ('Ctr_Roles', 'Controlador de roles', 'ACT', 'CTR'),
 ('Ctr_RutasEntrega', 'Controlador de rutas de entrega', 'ACT', 'CTR'),
 ('Ctr_Users', 'Controlador de usuarios', 'ACT', 'CTR'),
-('Menu_Admin', 'Menu administrador', 'ACT', 'MNU');
+('Menu_Admin', 'Menu administrador', 'ACT', 'MNU'),
+('Menu_FuncionesRol', 'Menu_FuncionesRol', 'ACT', 'MNU'),
+('Menu_Historial', 'Menu_Historial', 'ACT', 'MNU'),
+('Menu_Home', 'Menu_Home', 'ACT', 'MNU'),
+('Menu_PaymentCheckout', 'Menu_PaymentCheckout', 'ACT', 'MNU'),
+('Menu_Products', 'Menu_Products', 'ACT', 'MNU'),
+('Menu_ProductsM', 'Menu_ProductsM', 'ACT', 'MNU'),
+('Menu_RutasEntrega', 'Menu_RutasEntrega', 'ACT', 'MNU'),
+('Menu_UserRoles', 'Menu_UserRoles', 'ACT', 'MNU');
 
 INSERT INTO `roles` (`rolescod`, `rolesdsc`, `rolesest`) VALUES
 ('ADMIN', 'Administrador', 'ACT'),
 ('CLIENT', 'Cliente', 'ACT');
 
 INSERT INTO `funciones_roles` (`rolescod`, `fncod`, `fnrolest`, `fnexp`) VALUES
+('ADMIN', 'Controllers\\RutasEntrega\\RutaEntrega', 'ACT', '2030-12-31 23:59:59'),
+('ADMIN', 'Controllers\\RutasEntrega\\RutasEntrega', 'ACT', '2030-12-31 23:59:59'),
+('ADMIN', 'Controllers\\Transacciones\\Historial', 'ACT', '2030-12-31 23:59:59'),
 ('ADMIN', 'Ctr_Products', 'ACT', '2030-12-31 23:59:59'),
 ('ADMIN', 'Ctr_Roles', 'ACT', '2030-12-31 23:59:59'),
 ('ADMIN', 'Ctr_RutasEntrega', 'ACT', '2030-12-31 23:59:59'),
 ('ADMIN', 'Ctr_Users', 'ACT', '2030-12-31 23:59:59'),
 ('ADMIN', 'Menu_Admin', 'ACT', '2030-12-31 23:59:59'),
+('ADMIN', 'Menu_FuncionesRol', 'ACT', '2030-12-31 23:59:59'),
+('ADMIN', 'Menu_Historial', 'ACT', '2030-12-31 23:59:59'),
 ('ADMIN', 'Menu_Home', 'ACT', '2030-12-31 23:59:59'),
-('ADMIN', 'Controllers\\RutasEntrega\\RutaEntrega', 'ACT', '2030-12-31 23:59:59'),
-('ADMIN', 'Controllers\\RutasEntrega\\RutasEntrega', 'ACT', '2030-12-31 23:59:59'),
 ('ADMIN', 'Menu_PaymentCheckout', 'ACT', '2030-12-31 23:59:59'),
 ('ADMIN', 'Menu_Products', 'ACT', '2030-12-31 23:59:59'),
+('ADMIN', 'Menu_ProductsM', 'ACT', '2030-12-31 23:59:59'),
+('ADMIN', 'Menu_UserRoles', 'ACT', '2030-12-31 23:59:59'),
+('CLIENT', 'Controllers\\Transacciones\\Historial', 'ACT', '2030-12-31 23:59:59'),
 ('CLIENT', 'Ctr_Checkout', 'ACT', '2030-12-31 23:59:59'),
 ('CLIENT', 'Ctr_Products', 'ACT', '2030-12-31 23:59:59'),
-('CLIENT', 'Menu_Home', 'INA', '2030-12-31 23:59:59'),
+('CLIENT', 'Menu_Historial', 'ACT', '2030-12-31 23:59:59'),
 ('CLIENT', 'Menu_PaymentCheckout', 'ACT', '2030-12-31 23:59:59'),
 ('CLIENT', 'Menu_Products', 'ACT', '2030-12-31 23:59:59');
 
