@@ -2,12 +2,12 @@
 
 namespace Controllers\RutasEntrega;
 
-use Controllers\PublicController;
+use Controllers\PrivateController;
 use Views\Renderer;
 use Dao\RutasEntrega\RutasEntrega as RutasEntregaDAO;
 use Utilities\Site;
 
-class RutaEntrega extends PublicController
+class RutaEntrega extends PrivateController
 {
     private array $viewData = [];
     private array $modes = [
@@ -23,6 +23,7 @@ class RutaEntrega extends PublicController
     private float $distancia_km = 0;
     private int $duracion_min = 0;
     private string $mode = "DSP";
+    private string $rutaest = "ACT";
 
     public function run(): void
     {
@@ -49,7 +50,8 @@ class RutaEntrega extends PublicController
                         $this->origen,
                         $this->destino,
                         $this->distancia_km,
-                        $this->duracion_min
+                        $this->duracion_min,
+                        $this->rutaest
                     ) > 0) {
                         Site::redirectToWithMsg("index.php?page=RutasEntrega-RutasEntrega", "Ruta actualizada satisfactoriamente");
                     }
@@ -83,6 +85,7 @@ class RutaEntrega extends PublicController
                 $this->destino = $tmpRuta["destino"];
                 $this->distancia_km = floatval($tmpRuta["distancia_km"]);
                 $this->duracion_min = intval($tmpRuta["duracion_min"]);
+                $this->rutaest = $tmpRuta["rutaest"];
             }
         }
     }
@@ -94,6 +97,7 @@ class RutaEntrega extends PublicController
         $this->destino = strval($_POST["destino"] ?? "");
         $this->distancia_km = floatval($_POST["distancia_km"] ?? 0);
         $this->duracion_min = intval($_POST["duracion_min"] ?? 0);
+        $this->rutaest = strval($_POST["rutaest"] ?? "ACT");
     }
 
     private function prepareViewData()
@@ -106,7 +110,11 @@ class RutaEntrega extends PublicController
         $this->viewData["distancia_km"] = $this->distancia_km;
         $this->viewData["duracion_min"] = $this->duracion_min;
         $this->viewData["readonly"] = ($this->mode == "DSP" || $this->mode == "DEL") ? "readonly disabled" : "";
+        $this->viewData["readonlydes"] = ($this->mode == "DSP" || $this->mode == "DEL" || $this->mode == "UPD") ? "readonly disabled" : "";
         $this->viewData["showCommitBtn"] = ($this->mode != "DSP");
+        $this->viewData["rutaest"] = $this->rutaest;
+        $this->viewData["isACT"] = $this->rutaest === "ACT";
+        $this->viewData["isFIN"] = $this->rutaest === "FIN";
+        $this->viewData["isPEN"] = $this->rutaest === "PEN";
     }
 }
-?>

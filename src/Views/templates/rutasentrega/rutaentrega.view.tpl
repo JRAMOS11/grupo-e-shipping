@@ -18,7 +18,7 @@
 
         <div class="row my-2 align-center">
             <label class="col-12 col-m-3" for="destino">Destino</label>
-            <input class="col-12 col-m-9" {{readonly}} type="text" name="destino" id="destino" value="{{destino}}" />
+            <input class="col-12 col-m-9" {{readonlydes}} type="text" name="destino" id="destino" value="{{destino}}" />
         </div>
 
         <div class="row my-2 align-center">
@@ -29,6 +29,15 @@
         <div class="row my-2 align-center">
             <label class="col-12 col-m-3" for="duracion_min">Duración Min</label>
             <input class="col-12 col-m-9" {{readonly}} type="number" name="duracion_min" id="duracion_min" value="{{duracion_min}}" />
+        </div>
+
+        <div class="row my-2 align-center">
+            <label class="col-12 col-m-3" for="rutaest">Estado</label>
+            <select class="col-12 col-m-9" name="rutaest" id="rutaest" {{readonly}}>
+                <option value="ACT" {{if isACT}}selected{{endif isACT}}>Activo</option>
+                <option value="FIN" {{if isFIN}}selected{{endif isFIN}}>Finalizada</option>
+                <option value="PEN" {{if isPEN}}selected{{endif isPEN}}>Pendiente</option>
+            </select>
         </div>
 
         <div class="row my-4 align-center flex-end">

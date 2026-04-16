@@ -4,17 +4,7 @@
     {
       "id": "Menu_Products",
       "nav_url": "index.php?page=Products_ProductoController&action=listarProductos",
-      "nav_label": "Productos"
-    },
-    {
-      "id": "Menu_FuncionesRol",
-      "nav_url": "index.php?page=Roles_FuncionesRol",
-      "nav_label": "Funciones por Rol"
-    },
-    {
-      "id": "Menu_UserRoles",
-      "nav_url": "index.php?page=Usuarios_UsuarioRol",
-      "nav_label": "Usuarios Roles"
+      "nav_label": "Catálogo"
     },
     {
       "id": "Menu_SignIn",
@@ -29,19 +19,40 @@
   ],
   "private": [
     {
-      "id": "Menu_Home",
+      "id": "Menu_Products",
       "nav_url": "index.php?page=Products_ProductoController&action=listarProductos",
-      "nav_label": "Inicio"
+      "nav_label": "Catálogo"
     },
     {
-      "id": "Menu_Products",
-      "nav_url": "index.php?page=Products_Products",
+      "id": "Menu_ProductsM",
+      "nav_url": "index.php?page=Products_ProductoController&action=mantenimiento",
       "nav_label": "Productos"
     },
     {
       "id": "Menu_PaymentCheckout",
       "nav_url": "index.php?page=Checkout_Checkout",
       "nav_label": "Carretilla de Compra"
+    },
+    {
+      "id": "Ctr_RutasEntrega",
+      "nav_url": "index.php?page=RutasEntrega_RutasEntrega",
+      "nav_label": "Rutas de Entrega"
+    },
+    {
+      "id": "Menu_Historial",
+      "nav_url": "index.php?page=Transacciones_Historial",
+      "nav_label": "Mis Compras"
+    },
+    {
+      "id": "Menu_FuncionesRol",
+      "nav_url": "index.php?page=Roles_FuncionesRol",
+      "nav_label": "Funciones por Rol"
+    },
+    {
+      "id": "Menu_UserRoles",
+      "nav_url": "index.php?page=Usuarios_UsuarioRol",
+      "nav_label": "Usuarios Roles"
     }
+    
   ]
 }
